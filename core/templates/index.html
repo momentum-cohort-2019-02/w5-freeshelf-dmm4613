@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div class="top_bar">
+        <h1>Freeshelf</h1>
+    </div>
+    
+    <div class="category_list">
+        <h4>Books by category: CSS | HTML | JavaScript | Python | R</h4>
+    </div>
+    
+    <div class="book_list">
+        <h2>Recently added books</h2>
+            {% if book.title %}
+                <ul>
+                    {% for book in book.title %}
+                        <li>
+                            <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                        </li>
+
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>There are no books on the site.</p>
+                {% endif %}
+    </div>
+
+
+{% endblock %}
