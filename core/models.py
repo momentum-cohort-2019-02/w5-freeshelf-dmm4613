@@ -23,7 +23,7 @@ class Book(models.Model):
     
     # ManyToManyField used because category can contain many books. Books can ocver many categories.
     #Category class has already been defined so we can specify the object above.
-    category = models.ManyToManyField(Category, help_text='Select a category for this book')
+    category = models.ManyToManyField(Category, related_name='categories', help_text='Select a category for this book')
 
     class Meta:
         ordering = ['-date_added']
@@ -34,15 +34,13 @@ class Book(models.Model):
     
     def get_absolute_url(self):
         """Returns the url to access a detail record for this book."""
-        return reverse('book-detail', args=[str(self.id)])
+        return reverse('index')
 
 class Author(models.Model):
     """Model representing an author."""
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-
-    class Meta:
-        ordering = ['last_name', 'first_name']
+    name = models.CharField(max_length=100)
+    category = models.ManyToManyField(Category)
+    
     
     def get_absolute_url(self):
         """Returns the url to access a particular author instance."""
@@ -50,4 +48,4 @@ class Author(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return f'{self.last_name}, {self.first_name}'
+        return self.name

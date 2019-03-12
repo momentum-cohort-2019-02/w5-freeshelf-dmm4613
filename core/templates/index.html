@@ -1,29 +1,42 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <div class="top_bar">
+<div class="georgia">
+    <div class="f2 pl5 fl w-100 light-yellow bg-dark-blue ba">
         <h1>Freeshelf</h1>
     </div>
     
     <div class="category_list">
-        <h4>Books by category: CSS | HTML | JavaScript | Python | R</h4>
+        <h4>Books by category: 
+        {% if category_list %}
+            {% for category in category_list %}
+                {{ category.name }}
+                {% if not forloop.last %} | {% endif %}
+            {% endfor %}
+        {% endif %}
+       </h4>
     </div>
-    
     <div class="book_list">
+   
         <h2>Recently added books</h2>
-            {% if book.title %}
-                <ul>
-                    {% for book in book.title %}
+                {% if book_list %}
+                <ul class="list">
+                    {% for book in book_list %}
                         <li>
-                            <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                            <a class="f3" href="{{ book.url }}">{{ book.title }}</a> by {{ book.author }}
+                            <p>{{ book.description }}</p>
+                            {% if book.favorited %}
+                                <p> {{ book.favorited }} | {{ book.date_added }} | {{ book.category.get }}
+                            {% else %}
+                                <p> {{ book.date_added }} | {{ book.category.get }}
+                            {% endif %}
                         </li>
-
                     {% endfor %}
                 </ul>
                 {% else %}
-                <p>There are no books on the site.</p>
+                <p>There are no books on the site.</p> 
                 {% endif %}
     </div>
-
+</div>
 
 {% endblock %}
