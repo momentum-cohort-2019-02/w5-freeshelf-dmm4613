@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
+
+<div class="georgia">
+    <div class="f2 pl5 fl w-100 light-yellow bg-dark-blue ba">
+        <h1>Freeshelf</h1>
+    </div>
+
     <div class="category_list">
         <h4>Books by category: 
         {% if category_list %}
@@ -15,9 +20,9 @@
     <div class="book_list">
    
         <h2>Recently added books</h2>
-                {% if book_list %}
+                {% if category.book_set.count %}
                 <ul class="list">
-                    {% for book in book_list %}
+                    {% for book in category.book_set.count %}
                         <li>
                             <a class="f3" href="{{ book.url }}">{{ book.title }}</a> by {{ book.author }}
                             <p>{{ book.description }}</p>
@@ -33,6 +38,10 @@
                 <p>There are no books on the site.</p> 
                 {% endif %}
     </div>
+
+
 </div>
+
+
 
 {% endblock %}

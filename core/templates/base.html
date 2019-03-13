@@ -7,8 +7,13 @@
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
 </head>
 <body>
+    <div class="georgia">
+      <div class="f2 pl5 fl w-100 light-yellow bg-dark-blue ba">
+          <h1><a href="{% url 'index'%}" class="dim light-yellow">Freeshelf</a></h1>
+      </div>
 
       <div>{% block content %}{% endblock %}</div>
-
+    </div>
 </body>
 </html>
+
