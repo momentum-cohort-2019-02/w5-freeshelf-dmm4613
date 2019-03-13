@@ -2,6 +2,12 @@ from django.shortcuts import render
 from core.models import Book, Author, Category
 from django.views import generic
 
+class CategoriesListView(generic.ListView):
+    model = Category
+
+class CategoriesDetailView(generic.DetailView):
+    model = Category
+    
 def index(request):
     """View function for home page of site."""
 

@@ -70,6 +70,10 @@ class Category(models.Model):
             slug = base_slug + "-" + str(n)
         
         self.slug = slug
+    
+    def get_absolute_url(self):
+        return reverse("category_detail", args=[str(self.slug)])
+    
 
 class Author(models.Model):
 

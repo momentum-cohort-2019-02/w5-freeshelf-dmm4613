@@ -24,7 +24,7 @@ def load_book_data(apps, schema_editor):
             book_title = row['title']
             
             author, _ = Author.objects.get_or_create(name=row['author'])
-            category, _ = Category.objects.get_or_create(name=row['category'])
+            category, _ = Category.objects.get_or_create(name=row['category'], slug=slugify(row['category']),)
            
             
             if Book.objects.filter(title=book_title).count():
