@@ -5,6 +5,7 @@ from django.conf import settings
 import os.path
 import csv
 from django.core.files import File
+import datetime
 
 def load_book_data(apps, schema_editor):
     """
@@ -12,23 +13,36 @@ def load_book_data(apps, schema_editor):
     """
 
     Book = apps.get_model('core', 'Book')
+    Author = apps.get_model('core', 'Author')
+    Category = apps.get_model('core', 'Category')
     datapath = os.path.join(settings.BASE_DIR, 'initial_data')
     datafile = os.path.join(datapath, 'list_of_books.csv')
-    with open(datafile) as file:
+    with open(datafile, 'r', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
         for row in reader:
             book_title = row['title']
+            author_name = row['author']
+            category_item = row['category']
+            if Author.objects.filter(name=author_name).count():
+                continue
+            author = Author.objects.get(author_name)
+                
+            if Category.objects.filter(name=category_item).count():
+                continue
+            category = Category.objects.get(category_item)
+            
             if Book.objects.filter(title=book_title).count():
                 continue
             book = Book(
                 title=row['title'],
-                author=row['author'],
-                category=row['category'],
+                author=author.get()
                 description=row['description'],
                 url=row['url'],
-            )
-
+                date_added=datetime.datetime.now(),)
+                
+            author.save()
             book.save()
+            category.save()
 
 class Migration(migrations.Migration):
 
