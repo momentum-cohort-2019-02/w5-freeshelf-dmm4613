@@ -6,11 +6,11 @@ from django.urls import reverse
 class Book(models.Model):
 
     title = models.CharField(max_length=255)
-    author = models.ForeignKey('Author', on_delete=models.CASCADE)
-    slug = models.SlugField(unique=True)
+    author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=True, null=True)
+    slug = models.SlugField()
     description = models.TextField(max_length=1000)
     book_url = models.CharField(max_length=255)
-    date_added = models.DateField(auto_now=True)
+    date_added = models.DateField(max_length=25, auto_now=True)
     category = models.ManyToManyField('Category')
 
     class Meta:
@@ -26,7 +26,7 @@ class Book(models.Model):
         self.set_slug()
         super().save(*args, **kwargs)
 
-    def set_slut(self):
+    def set_slug(self):
         # If the slug is already set, stop here.
         if self.slug:
             return
@@ -44,7 +44,7 @@ class Book(models.Model):
 class Category(models.Model):
 
     name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True)  
+    slug = models.SlugField()  
 
     class Meta:
         verbose_name_plural = "categories"
@@ -56,7 +56,7 @@ class Category(models.Model):
         self.set_slug()
         super().save(*args, **kwargs)
 
-    def set_slut(self):
+    def set_slug(self):
         # If the slug is already set, stop here.
         if self.slug:
             return
