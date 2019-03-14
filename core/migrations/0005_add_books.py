@@ -39,8 +39,7 @@ def load_book_data(apps, schema_editor):
 
             book.save()
             book.category.set([category])    
-            
-            book.save()
+         
             
 
 class Migration(migrations.Migration):

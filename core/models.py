@@ -7,7 +7,7 @@ class Book(models.Model):
 
     title = models.CharField(max_length=255)
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=True, null=True)
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=255)
     description = models.TextField()
     book_url = models.CharField(max_length=255)
     date_added = models.DateField(max_length=25, auto_now=True)
@@ -44,7 +44,7 @@ class Book(models.Model):
 class Category(models.Model):
 
     name = models.CharField(max_length=255)
-    slug = models.SlugField()  
+    slug = models.SlugField(max_length=255)  
 
     class Meta:
         verbose_name_plural = "categories"
