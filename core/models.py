@@ -8,7 +8,7 @@ class Book(models.Model):
     title = models.CharField(max_length=255)
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=True, null=True)
     slug = models.SlugField()
-    description = models.TextField(max_length=1000)
+    description = models.TextField()
     book_url = models.CharField(max_length=255)
     date_added = models.DateField(max_length=25, auto_now=True)
     category = models.ManyToManyField('Category')
