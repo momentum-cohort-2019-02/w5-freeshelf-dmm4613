@@ -15,27 +15,28 @@
     </div>
     <div class="book_list">
    
-        <h2>Category</h2>
-                {% if category.book_set.count %}
-                <ul class="list">
-                    {% for book in category.book_set.all %}
-                        <li>
-                            <a class="f3 dim dark-blue" target='_blank' href="{{ book.book_url }}">{{ book.title }}</a>
-                            {% if book.author|wordcount != 0 %}
-                                by {{ book.author }}
-                            {% endif %}
-                            <p>{{ book.description }}</p>
-                            {% if book.favorited %}
-                                <p> {{ book.favorited }} | {{ book.date_added }} | {{ book.category.get }}
-                            {% else %}
-                                <p> {{ book.date_added }}
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p>There are no books on the site.</p> 
-                {% endif %}
+        <h2>{{ category.name }}</h2>
+            {% if category.book_set.count %}
+            <ul class="list">
+                {% for book in category.book_set.all %}
+                    <li>
+                        <a class="f3 dim dark-blue" target='_blank' href="{{ book.book_url }}">{{ book.title }}</a>
+                        {% comment %} below will check to see if there is an author.{% endcomment %}
+                        {% if book.author|wordcount != 0 %}
+                            by {{ book.author }}
+                        {% endif %}
+                        <p>{{ book.description|truncatewords:50 }}</p>
+                        {% if book.favorited %}
+                            <p> {{ book.favorited }} | {{ book.date_added }} | {{ book.category.get }}
+                        {% else %}
+                            <p> {{ book.date_added }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>There are no {{ category.name}} books on the site.</p> 
+            {% endif %}
     </div>
 
 </div>

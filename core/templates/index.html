@@ -13,18 +13,18 @@
         {% endif %}
        </h4>
     </div>
-    <div class="book_list">
+    <div>
    
         <h2>Recently added books</h2>
                 {% if book_list %}
-                <ul class="list">
+                <ul class="list flex ">
                     {% for book in book_list %}
-                        <li>
+                        <li class="b--solid ma1">
                             <a class="f3 dim dark-blue" target='_blank' href="{{ book.book_url }}">{{ book.title }}</a>
                             {% if book.author|wordcount != 0 %}
                                 by {{ book.author }}
                             {% endif %}
-                            <p>{{ book.description }}</p>
+                            <p>{{ book.description|truncatewords:50 }}</p>
                             {% if book.favorited %}
                                 <p> {{ book.favorited }} | {{ book.date_added }} | {{ book.category.get }}
                             {% else %}
