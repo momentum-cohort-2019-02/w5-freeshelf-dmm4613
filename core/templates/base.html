@@ -12,9 +12,15 @@
       <div class="flex flex-wrap items-center justify-between f2 pl5 fl w-100 light-yellow bg-dark-blue ba">
           <h1><a href="{% url 'index'%}" class="dim light-yellow">Freeshelf</a></h1>
           <div class="flex flex-wrap justify-between pa3">
+            {% if request.user.is_authenticated %}
+            <p class="mr2 light-yellow">{{ user.username }}</p>
+            <p class="mr2">|</p>
+            <p class="mr2"><a class="light-yellow dim" href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
+            {% else %}
             <p class="mr2"><a class="light-yellow dim" href="{% url 'auth_login' %}">Login</a></p>
             <p class="mr2">|</p>
             <p class="mr2"><a class="light-yellow dim" href="{% url 'registration_register' %}">Register</a></p>
+            {% endif %}
           </div>
       </div>
       
