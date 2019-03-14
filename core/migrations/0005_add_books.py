@@ -24,7 +24,7 @@ def load_book_data(apps, schema_editor):
             book_title = row['title']
             
             author, _ = Author.objects.get_or_create(name=row['author'])
-            category, _ = Category.objects.get_or_create(name=row['category'], slug=slugify(row['category']),)
+            category, _ = Category.objects.get_or_create(name=row['category'], slug=slugify(row['category'])[:50],)
            
             
             if Book.objects.filter(title=book_title).count():
@@ -35,7 +35,7 @@ def load_book_data(apps, schema_editor):
                 description=row['description'],
                 book_url=row['url'],
                 date_added=datetime.datetime.now(),
-                slug=slugify(row['title']),)
+                slug=slugify(row['title'])[:50],)
 
             book.save()
             book.category.set([category])    
