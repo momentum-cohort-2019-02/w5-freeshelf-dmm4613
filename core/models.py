@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 class Book(models.Model):
 
@@ -12,6 +14,7 @@ class Book(models.Model):
     book_url = models.CharField(max_length=255)
     date_added = models.DateField(max_length=25, auto_now=True)
     category = models.ManyToManyField('Category')
+    favorited_by = models.ManyToManyField(to=User, related_name='favorite_books', through='Favorite')
 
     class Meta:
         ordering = ['-date_added']
@@ -81,3 +84,8 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    favorited_at = models.DateTimeField(auto_now_add=True)
