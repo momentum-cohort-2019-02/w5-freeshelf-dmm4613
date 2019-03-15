@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div>
+    <h2>Hi, {{user.username}}! These are your favorited books</h2>
+        {% if user.favorite_set.count %}
+        <ul class="list">
+            {% for favorite in user.favorite_set.all %}
+               
+                <li class="b--solid ma1"> 
+                    {{ favorite.book }}
+                    {% comment %} <a class="f3 dim dark-blue" target='_blank' href="{{ book.book_url }}">{{ book.title }}</a>
+                    {% if book.author|wordcount != 0 %}
+                        by {{ book.author }}
+                    {% endif %}
+                    <p>{{ book.description|truncatewords:50 }}</p>
+                    {% if book.favorited %}
+                        <p> {{ book.favorited }} | {{ book.date_added }} | {{ book.category.get }}
+                    {% else %}
+                        <p> {{ book.date_added }} | {{ book.category.get }}
+                    {% endif %} {% endcomment %}
+                </li>
+           
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>There are no books on the site.</p> 
+        {% endif %}
+</div>
+
+
+
+
+
+{% endblock %}

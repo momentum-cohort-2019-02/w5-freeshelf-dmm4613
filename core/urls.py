@@ -6,4 +6,5 @@ urlpatterns = [
     path('category/', views.CategoriesListView.as_view(), name='categories' ),
     path('category/<slug:slug>', views.CategoriesDetailView.as_view(), name='category_detail'),
     path('category/<slug:slug>/<int:book_pk>/', views.book_favorite_view, name="book_favorite"),
+    path('profile/', views.user_view, name="user_view"),
 ] 

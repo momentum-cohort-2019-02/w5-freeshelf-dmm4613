@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from core.models import Book, Author, Category
+from core.models import Book, Author, Category, Favorite
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -39,7 +39,6 @@ def index(request):
 @login_required
 def book_favorite_view(request, book_pk, slug):   
     book = get_object_or_404(Book, pk=book_pk)
-  
 
     favorite, created = request.user.favorite_set.get_or_create(book=book)
 
@@ -50,3 +49,13 @@ def book_favorite_view(request, book_pk, slug):
         favorite.delete()
 
     return redirect('category_detail', slug)
+
+def user_view(request):
+    favorite = Favorite.objects.all()
+    book_list = Book.objects.all()
+
+    context = {
+        'favorite': favorite,
+        'book_list': book_list,
+    }
+    return render(request, 'core/user_view.html', context=context)
