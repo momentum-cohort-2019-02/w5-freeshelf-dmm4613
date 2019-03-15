@@ -27,7 +27,8 @@
                         {% endif %}
                         <p>{{ book.description|truncatewords:50 }}</p>
                         {% if request.user.is_authenticated %}
-                        <form action="{% url 'book_favorite' book_pk=book.pk %}" method="POST">
+                     
+                        <form action="{% url 'book_favorite' book_pk=book.pk slug=category.slug %}" method="POST">
                             {% csrf_token %}
                             <button type="submit">
                                 {% if book in request.user.favorite_books.all %}
@@ -37,6 +38,7 @@
                                 {% endif %}
                                 this book</button>
                         </form>
+                       
                         {% endif %}
                         {% if book.favorited %}
                             <p> {{ book.favorited }} | {{ book.date_added }} | {{ book.category.get }}

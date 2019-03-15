@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_http_methods
+from django.http import HttpResponseRedirect
 
 class CategoriesListView(generic.ListView):
     model = Category
@@ -36,8 +37,9 @@ def index(request):
 
 @require_http_methods(['POST'])
 @login_required
-def book_favorite_view(request, book_pk):   
+def book_favorite_view(request, book_pk, slug):   
     book = get_object_or_404(Book, pk=book_pk)
+  
 
     favorite, created = request.user.favorite_set.get_or_create(book=book)
 
@@ -47,4 +49,4 @@ def book_favorite_view(request, book_pk):
         messages.info(request, f"You have unfavorited {book.title}.")
         favorite.delete()
 
-    return redirect(book.get_absolute_url)
+    return redirect('category_detail', slug)
