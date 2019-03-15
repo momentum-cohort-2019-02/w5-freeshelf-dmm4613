@@ -23,7 +23,7 @@ class Book(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('index')
+        return reverse('book_favorite', args=(self.pk,))
     
     def save(self, *args, **kwargs):
         self.set_slug()

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from core.models import Book, Author, Category
 from django.views import generic
 from django.contrib.auth.decorators import login_required
@@ -36,15 +36,15 @@ def index(request):
 
 @require_http_methods(['POST'])
 @login_required
-def book_favorite_view(request, book_pk):
-    dog = get_object_or_404(Book, pk=book_pk)
+def book_favorite_view(request, book_pk):   
+    book = get_object_or_404(Book, pk=book_pk)
 
     favorite, created = request.user.favorite_set.get_or_create(book=book)
 
     if created:
-        messages.success(request, f"You have favorited {book.name}.")
+        messages.success(request, f"You have favorited {book.title}.")
     else:
-        messages.info(request, f"You have unfavorited {book.name}.")
+        messages.info(request, f"You have unfavorited {book.title}.")
         favorite.delete()
 
     return redirect(book.get_absolute_url)
