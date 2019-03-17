@@ -30,7 +30,7 @@
                      
                         <form action="{% url 'book_favorite' book_pk=book.pk slug=category.slug %}" method="POST">
                             {% csrf_token %}
-                            <button type="submit">
+                            <button type="submit" class=    "bg-light-gray b--solid">
                                 {% if book in request.user.favorite_books.all %}
                                     Unfavorite
                                 {% else %}
