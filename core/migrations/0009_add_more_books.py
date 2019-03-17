@@ -12,7 +12,7 @@ def load_book_data(apps, schema_editor):
     Read a CSV file full of books and insert them into the database.
     """
 
-    Book = apps.get_model('core', 'Book')
+    Book = apps.get_model('core', 'Book')   
     Author = apps.get_model('core', 'Author')
     Category = apps.get_model('core', 'Category')
 
@@ -45,7 +45,7 @@ def load_book_data(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0004_auto_20190313_1259'),
+        ('core', '0008_auto_20190314_1333'),
     ]
 
     operations = [

@@ -6,21 +6,12 @@
 <div>
     <h2>Hi, {{user.username}}! These are your favorited books</h2>
         {% if user.favorite_set.count %}
-        <ul class="list">
+        <ul class="list flex-wrap justify-center bg-mid-gray b--solid">
             {% for favorite in user.favorite_set.all %}
                
-                <li class="b--solid ma1"> 
-                    {{ favorite.book }}
-                    {% comment %} <a class="f3 dim dark-blue" target='_blank' href="{{ book.book_url }}">{{ book.title }}</a>
-                    {% if book.author|wordcount != 0 %}
-                        by {{ book.author }}
-                    {% endif %}
-                    <p>{{ book.description|truncatewords:50 }}</p>
-                    {% if book.favorited %}
-                        <p> {{ book.favorited }} | {{ book.date_added }} | {{ book.category.get }}
-                    {% else %}
-                        <p> {{ book.date_added }} | {{ book.category.get }}
-                    {% endif %} {% endcomment %}
+                <li class="b--solid bg-light-yellow ma1 w60"> 
+                    <p class="fw5 6rem"><a class="dim black" href="{{ favorite.book.book_url }}">{{ favorite.book }}</a></p>
+                    
                 </li>
            
             {% endfor %}

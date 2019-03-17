@@ -25,7 +25,7 @@ def index(request):
     """View function for home page of site."""
 
     book_list = Book.objects.all()[:3]
-    category_list = Category.objects.all()[:5]
+    category_list = Category.objects.all()[:8]
 
     context = {
         'book_list': book_list,

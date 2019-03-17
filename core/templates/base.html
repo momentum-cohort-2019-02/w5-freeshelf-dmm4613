@@ -13,7 +13,7 @@
           <h1><a href="{% url 'index'%}" class="dim light-yellow">Freeshelf</a></h1>
           <div class="flex flex-wrap justify-between pa3">
             {% if request.user.is_authenticated %}
-            <p class="mr2"><a class="light-yellow dim" href="{% url 'user_view' %}">{{ user.username }}</a></p>
+            <p class="mr2"><a class="light-yellow dim" href="{% url 'user_view' %}">Your Book List</a></p>
             <p class="mr2">|</p>
             <p class="mr2"><a class="light-yellow dim" href="{% url 'auth_logout' %}?next=/core/">Logout</a></p>
             {% else %}

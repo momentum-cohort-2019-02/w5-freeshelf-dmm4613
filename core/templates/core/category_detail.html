@@ -17,9 +17,9 @@
    
         <h2>{{ category.name }}</h2>
             {% if category.book_set.count %}
-            <ul class="list">
+            <ul class="list b--solid bg-gray">
                 {% for book in category.book_set.all %}
-                    <li>
+                    <li class="b--solid ma1 bg-light-yellow">
                         <a class="f3 dim dark-blue" target='_blank' href="{{ book.book_url }}">{{ book.title }}</a>
                         {% comment %} below will check to see if there is an author.{% endcomment %}
                         {% if book.author|wordcount != 0 %}
@@ -40,11 +40,7 @@
                         </form>
                        
                         {% endif %}
-                        {% if book.favorited %}
-                            <p> {{ book.favorited }} | {{ book.date_added }} | {{ book.category.get }}
-                        {% else %}
-                            <p> {{ book.date_added }}
-                        {% endif %}
+                            <p> Date added: {{ book.date_added }}
                     </li>
                 {% endfor %}
             </ul>

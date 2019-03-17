@@ -17,19 +17,16 @@
    
         <h2>Recently added books</h2>
                 {% if book_list %}
-                <ul class="list flex ">
+                <ul class="list flex-wrap b--solid bg-gray ">
                     {% for book in book_list %}
-                        <li class="b--solid ma1">
+                        <li class="b--solid ma1 bg-light-yellow">
                             <a class="f3 dim dark-blue" target='_blank' href="{{ book.book_url }}">{{ book.title }}</a>
                             {% if book.author|wordcount != 0 %}
                                 by {{ book.author }}
                             {% endif %}
                             <p>{{ book.description|truncatewords:50 }}</p>
-                            {% if book.favorited %}
-                                <p> {{ book.favorited }} | {{ book.date_added }} | {{ book.category.get }}
-                            {% else %}
-                                <p> {{ book.date_added }} | {{ book.category.get }}
-                            {% endif %}
+                            <p> Date added: {{ book.date_added }} | {{ book.category.get }}
+                           
                         </li>
                     {% endfor %}
                 </ul>
